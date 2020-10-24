@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_food_list_bloc/bloc/food_bloc.dart';
 import 'package:flutter_food_list_bloc/screens/food_list.dart';
 import 'package:flutter_food_list_bloc/screens/food_list_screen.dart';
+import 'package:flutter_food_list_bloc/model/food.dart';
 
 class FoodForm extends StatefulWidget {
   @override
@@ -13,7 +16,7 @@ class _FoodFormState extends State<FoodForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Coding with Curry')),
+      appBar: AppBar(title: Text('Food List with Bloc')),
       body: Container(
         padding: EdgeInsets.all(36),
         child: Center(
@@ -42,7 +45,13 @@ class _FoodFormState extends State<FoodForm> {
       floatingActionButton: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          FloatingActionButton(heroTag: 'button1', child: Icon(Icons.save), onPressed: () => {}),
+          FloatingActionButton(
+            heroTag: 'button1',
+            child: Icon(Icons.save),
+            onPressed: () => BlocProvider.of<FoodBloc>(context).add(
+              AddFood(Food(_foodname)),
+            ),
+          ),
           SizedBox(height: 16),
           FloatingActionButton(
             heroTag: 'button2',
